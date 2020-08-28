@@ -1,4 +1,4 @@
-# project_Ojakgyo
+# Employee 도메인 관련 기능 기술 문서
 
 <h3>목적</h3><br>
 

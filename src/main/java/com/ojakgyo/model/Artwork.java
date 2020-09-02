@@ -11,53 +11,43 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Getter
-@Entity
-public class Artwork {      
-   @Id @GeneratedValue
-   @Column(name="ARTWORK_ID")
-   private int id;
-   
-   @Column(name="ARTWORK_TITLE")
-   private String title;
-   
-   @Column(name="ARTWORK_NICKNAME")
-   private String nickname;
-   
-   @Column(name="ARTWORK_LIKE")
-   private String like;
-
-   @Column(name="ARTWORK_CONTENT")
-   private String content;
-   
-   @ManyToOne(fetch =FetchType.LAZY)
-   @JoinColumn(name = "MEMBER_ID")
-   private Member member;
-   
-   @OneToMany(mappedBy = "artwork")
-   private List<Comment> comments = new ArrayList<>();
-
-   @OneToMany(mappedBy = "artwork")
-   private List<Image> images = new ArrayList<>();
-   
-   @Builder
-   public Artwork(String title, String nickname, String like, String content, Member member, List<Comment> comments,
-		List<Image> images) {
+@Entity @Getter @NoArgsConstructor
+@Table(name = "ARTWORK")
+public class Artwork {
+	@Id @GeneratedValue
+	@Column(name = "ARTWORK_ID")//주의
+	private int id;
+	@Column(name = "ARTWORK_TITLE")
+	private String title;
+	@Column(name = "ARTWORK_LIKE")
+	private int like;
+	@Column(name = "ARTWORK_CONTENT")
+	private String content;
 		
-	   this.title = title;
-	   this.nickname = nickname;
-	   this.like = like;
-	   this.content = content;
-	   this.member = member;
-	   this.comments = comments;
-	   this.images = images;	
-}
-   
-   
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MEMBER_ID")
+	private Member member;
+	
+	@OneToMany(mappedBy = "artwork")
+	private List<Comment> comments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "artwork")
+	private List<Image> images = new ArrayList<>();
+	
+	@Builder
+	public Artwork(int id, String title, String content, int like) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.like = like;
+	}
+	
+	
 }

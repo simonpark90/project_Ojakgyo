@@ -16,24 +16,26 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Image {
-   @Id @GeneratedValue
-   @Column(name = "IMAGE_ID")
-   private int id;
-   
-   @Column(name = "IMAGE_PATH")
-   private String imagePath;
-   
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "ARTWORK_ID")
-   private Artwork artwork;
+	@Id @GeneratedValue
+	@Column(name = "IMAGE_ID")
+	private int id;
+	
+	@Column(name = "IMAGE_PATH")
+	private String imagePath;
+	
+	//하나의 artwork는 여러개의 image를 가질 수 있음.
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ARTWORK_ID")
+	private Artwork artwork;
 
-   @Builder
-   public Image(String imagePath, Artwork artwork) {
-	   super();
-	   this.imagePath = imagePath;
-	   this.artwork = artwork;
-}
-   
-   
-   
+	@Builder
+	public Image(int id, String imagePath, Artwork artwork) {
+		super();
+		this.id = id;
+		this.imagePath = imagePath;
+		this.artwork = artwork;
+	}
+	
+	
+	
 }

@@ -15,41 +15,44 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Getter
 @Entity
-@Table(name="COMMENTO")
+@Getter
+@NoArgsConstructor
+@Table(name = "COMMENTO")
 public class Comment {
-   @Id @GeneratedValue
-   private int id;
-   
-   @Column(name = "COMMENT_ID")
-   private String content;
-   
-   @Column(name = "COMMENT_WRITEDATE")
-   private Date WriteDate;
-   
-   @Column(name = "COMMENT_LIKE")
-   private int like;
-   
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name="MEMBER_ID")
-   private Member member;
+	
+	@Id @GeneratedValue
+	@Column(name = "COMMENT_ID")
+	private int id; 
+	
+	@Column(name = "COMMENT_CONTENT")
+	private String content;
+	
+	@Column(name = "COMMENT_WRITEDATE")
+	private Date writeDate;
+	
+	@Column(name = "COMMENT_LIKE")
+	private int like;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MEMBER_ID")
+	private Member member;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ARTWORK_ID")
+	private Artwork artwork;
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name="artwork_ID")
-   private Artwork artwork;
-
-   @Builder
-   public Comment(String content, Date writeDate, int like, Member member, Artwork artwork) {
-	   super();
-	   this.content = content;
-	   WriteDate = writeDate;
-	   this.like = like;
-	   this.member = member;
-	   this.artwork = artwork;
-}
-   
-   
-   
+	@Builder
+	public Comment(int id, String content, Date writeDate, int like, Member member, Artwork artwork) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.writeDate = writeDate;
+		this.like = like;
+		this.member = member;
+		this.artwork = artwork;
+	}
+	
+	
+	
 }

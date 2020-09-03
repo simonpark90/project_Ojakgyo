@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ojakgyo.model.Artwork;
@@ -18,8 +17,6 @@ public class ArtworkController {
 	@Autowired
 	private ArtworkService service;
 	
-//// optional!!!?????????
-	Optional<Artwork> op;
 	
 //	Autowired	쓰면 아래는 생략 가능
 //	ArtworkController(ArtworkService ArtworkServiceImpl) {
@@ -28,8 +25,8 @@ public class ArtworkController {
 	
 	@GetMapping("/artworks")
 	List<Artwork> FindAllArtworks(){
-		return service.findbyId(id).orElseThrow(() -> new ArtworkNotFoundException(title));
-	
+//		return service.findbyId(id).orElseThrow(() -> new ArtworkNotFoundException(title));
+		return null;
 	}
 	//null일 경우 예외 발생 자바 신문법으로
 //	throw new EmployeeNotFoundException();
@@ -37,7 +34,8 @@ public class ArtworkController {
 
 	@GetMapping("/artworks/{title}")
 	List<Artwork> findArtworkByTitle(@PathVariable String title){
-		return service.findArtworkByTitle(title).orElseThrow(() -> new ArtworkNotFoundException(title));
+		return Optional.ofNullable(service.findArtworkByTitle(title)).get();
+//		return service.findArtworkByTitle(title).orElseThrow(() -> new ArtworkNotFoundException(title));
 	}
 	
 	

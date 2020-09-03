@@ -5,9 +5,19 @@ Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/Signin',
-    name: 'Signin',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/Signin.vue')
+    path: '/Signin1',
+    name: 'Signin1',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Signin1.vue')
+  },
+  {
+    path: '/Artwork',
+    name: 'Artwork',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Artwork.vue')
+  },
+  {
+    path: '/Upload',
+    name: 'Upload',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Upload.vue')
   },
   {
     path: '/Signup',

@@ -11,8 +11,8 @@ public interface MemberRepository extends JpaRepository<Member, Long>{//엔티�
 	//이 인터페이스를 상속받은 인터페이스만 생성하면 해당 엔티티에 대한 CRUD를 공짜로 사용할 수 있게 됨.
 //	Member findByNickName();
 	
-//	Member findMemberByEmailAndPassWord();
 	Member findMemberByEmailAndPassword(String email, String password);
+	Member findEmailByNameAndPhone(String name, String phone);
 }
 /**
  * 명명규칙

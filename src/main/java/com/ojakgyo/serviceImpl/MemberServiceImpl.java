@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		return null;
 	}
+	
+	@Override
+	public String findEmailByNameAndPhone(String name, String phone) {
+		return repository.findEmailByNameAndPhone(name, phone).getEmail();
+	
+	}
 }

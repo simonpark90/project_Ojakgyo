@@ -60,6 +60,7 @@ public class AuthorizationController {
 		try {
 			Member loginMember = repository.findMemberByEmailAndPassword(member.getEmail(), member.getPassword());
 			
+			System.out.println(loginMember);
 			//로그인 성공시 토큰 생성
 			String token = jwtService.create(loginMember);
 			System.out.println("======내가 토큰!!!!!!!======"+token);
@@ -69,11 +70,14 @@ public class AuthorizationController {
 			
 			System.out.println("생성된 token -- " + token);
 			
-			resultMap.put("auth_token", token);
-			resultMap.put("status", true);
-			resultMap.put("data", loginMember);
-			
-			status = HttpStatus.ACCEPTED;
+			if(token != null) {
+				status = HttpStatus.OK;
+				resultMap.put("auth_token", token);
+				resultMap.put("status", true);
+				resultMap.put("data", loginMember);
+			}else {
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
 		
 		}catch(RuntimeException e) {
 			log.error("로그인 실패", e);

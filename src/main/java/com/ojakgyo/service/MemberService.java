@@ -6,4 +6,5 @@ public interface MemberService {
 	boolean signUp(Member member);
 
 	Member findByNickName(String email, String password);
+	String findEmailByNameAndPhone(String name, String phone);
 }

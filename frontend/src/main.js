@@ -8,6 +8,8 @@ import VueAxios from './plugins/axios'
 Vue.use(VueAxios);
 
 Vue.config.productionTip = false;
+Vue.prototype.$EventBus = new Vue();
+
 
 new Vue({
   router,

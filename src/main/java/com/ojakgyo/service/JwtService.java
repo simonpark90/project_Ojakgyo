@@ -31,25 +31,29 @@ public class JwtService {
 	 * @return
 	 */
 	public String create(final Member member) {
+		if(member != null) {
+			System.out.println("JwtService의 create()----");
+			log.trace("time : {} ", expireMin);
+			
+			final JwtBuilder builder = Jwts.builder();
+			
+			builder.setHeaderParam("typ", "JWT");//header정보 설정.
+			
+			//토큰 제목설정, 유효기간, 담고 싶은 정보
+			builder.setSubject("로그인 토큰").setExpiration(new Date(System.currentTimeMillis() + 100*60*expireMin)).
+			claim("Member", member).claim("second", "new data");
+			
+			//signature - secret key를 이용한 암호화
+			builder.signWith(SignatureAlgorithm.HS256, salt.getBytes());
+			//oAuth와 다르게 별도의 저장소에 저장하지 않고, 토큰 그 자체가 정보가 됨.
+			//마지막 직렬화 처리 - 네트웤상에서 데이터 손실없이 전송하는 구조로 구성.
+			final String jwt = builder.compact();
+			log.debug("토큰 발행 : {} ", jwt);
+			return jwt;			
+		}else {
+			return null;
+		}
 		
-		System.out.println("JwtService의 create()----");
-		log.trace("time : {} ", expireMin);
-		
-		final JwtBuilder builder = Jwts.builder();
-		
-		builder.setHeaderParam("typ", "JWT");//header정보 설정.
-		
-		//토큰 제목설정, 유효기간, 담고 싶은 정보
-		builder.setSubject("로그인 토큰").setExpiration(new Date(System.currentTimeMillis() + 100*60*expireMin)).
-		claim("Member", member).claim("second", "new data");
-		
-		//signature - secret key를 이용한 암호화
-		builder.signWith(SignatureAlgorithm.HS256, salt.getBytes());
-		//oAuth와 다르게 별도의 저장소에 저장하지 않고, 토큰 그 자체가 정보가 됨.
-		//마지막 직렬화 처리 - 네트웤상에서 데이터 손실없이 전송하는 구조로 구성.
-		final String jwt = builder.compact();
-		log.debug("토큰 발행 : {} ", jwt);
-		return jwt;
 	}
 	
 	/**

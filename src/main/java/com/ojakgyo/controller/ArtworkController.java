@@ -28,7 +28,8 @@ public class ArtworkController {
 	
 	@GetMapping("/artworks")
 	List<Artwork> FindAllArtworks(){
-		return service.findbyId(id).orElseThrow(() -> new ArtworkNotFoundException(title));
+		
+		return service.FindAllArtworks().orElseThrow(() -> new ArtworkNotFoundException());
 	
 	}
 	//null일 경우 예외 발생 자바 신문법으로

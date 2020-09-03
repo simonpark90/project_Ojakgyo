@@ -7,7 +7,7 @@
 		<div id="nav">
 			<ul>
 				<!-- <li><a href="#" accesskey="3" title="">ArtWorks</a></li> -->
-                <router-link to ="/">ArtWorks</router-link>
+                <router-link to ="/Artworks">ArtWorks</router-link>
                 <router-link to ="/Signin">Sign in</router-link>
                 <router-link to ="/Signup">Sign up</router-link>
 			</ul>

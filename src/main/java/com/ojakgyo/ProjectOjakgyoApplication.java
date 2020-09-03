@@ -41,7 +41,7 @@ public class ProjectOjakgyoApplication implements WebMvcConfigurer{
 		
 //여기수정.										//addPathPatterns("/api/**")
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/**").
-		excludePathPatterns("/api/logincheck/**")
+		excludePathPatterns("/api/logincheck/**").excludePathPatterns("/member/{email}")
 		.excludePathPatterns(Arrays.asList("/css/**"))
 				.excludePathPatterns(Arrays.asList("/scripts/**"))
 						.excludePathPatterns(Arrays.asList("/plugin/**"));//Arrays.asList는 지워도 됨.
@@ -57,7 +57,6 @@ public class ProjectOjakgyoApplication implements WebMvcConfigurer{
 	public void addCorsMappings(CorsRegistry registry) {
 		System.out.println("addCorsMappings() --");
 		//addMapping() : CORS를 적용할 URL패턴 
-		
 		
 		/*
 		 * Default값은 아래와 같습니다.

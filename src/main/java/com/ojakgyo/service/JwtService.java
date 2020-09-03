@@ -11,6 +11,7 @@ import com.ojakgyo.model.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +58,18 @@ public class JwtService {
 	 * 문제 발생시 RuntimeException 발생
 	 * @param jwt
 	 */
-	public void checkValid(String jwt) {
+	public Jws<Claims> checkValid(String jwt) {
 		log.info("토큰 검증 : {} ", jwt);
-		Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt);
+		return Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt);
+		/**
+		 *  ClaimJwtException: JWT 권한claim 검사가 실패했을 때
+			ExpiredJwtException: 유효 기간이 지난 JWT를 수신한 경우
+			MalformedJwtException: 구조적인 문제가 있는 JWT인 경우
+			PrematureJwtException: 접근이 허용되기 전인 JWT가 수신된 경우
+			SignatureException: 시그너처 연산이 실패하였거나, JWT의 시그너처 검증이 실패한 경우
+			UnsupportedJwtException: 수신한 JWT의 형식이 애플리케이션에서 원하는 형식과 맞지 않는 경우. 예를 들어, 암호화된 JWT를 사용하는 애프리케이션에 암호화되지 않은 JWT가 전달되는 경우에 이 예외가 발생합니다.
+			SignatureException, IllegalArgumentException
+		 */
 	}
 	
 	/**
@@ -73,10 +83,12 @@ public class JwtService {
 		
 		try {
 			claims = Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt);
-			
-		}catch(final Exception e) {
-			throw new RuntimeException();
+		} catch (final JwtException jwtExcept) {
+			throw new JwtException("인증 토큰이 없음!");
+		} catch(final IllegalArgumentException illegal) {
+			throw new IllegalArgumentException("잘못된 인자값");
 		}
+		
 		log.trace("claims : {} ", claims);
 		log.info("----get() : " + claims.getBody().toString());//{sub=로그인 토큰, exp=1598853063, User={email=a@b.com, password=11}, second=new data}가 출력됨.
 		//즉 header와 sign을 제외한 payload만 출력됨.

@@ -80,10 +80,12 @@ export default {
               // 'Access-Control-Allow-Header' : storage.getItem("jwt-auth-token")
             }
           }).then(res => {
+            console.log('정보조회성공?')
+            console.log(JSON.stringify(res.data))
             this.setDetailInfo("정보조회성공", storage.getItem("jwt-auth-token"), this.info, JSON.stringify(res.data))
           }).catch(e => {
-            alert('catch')
-            this.setDetailInfo("정보 조회 실패", "", e.response.data.msg);
+            console.log('정보조회실패?')
+            this.setDetailInfo("정보 조회 실패", "", e.response.data.message);
           })
         },
         login: function(){

@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		return null;
 	}
+
+	@Override
+	public Member emailDuplCheck(String email) {
+		return repository.findByEmail(email);
+		
+	}
 }

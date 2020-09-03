@@ -13,6 +13,8 @@ public interface MemberRepository extends JpaRepository<Member, Long>{//엔티�
 	
 //	Member findMemberByEmailAndPassWord();
 	Member findMemberByEmailAndPassword(String email, String password);
+	
+	Member findByEmail(String email);
 }
 /**
  * 명명규칙

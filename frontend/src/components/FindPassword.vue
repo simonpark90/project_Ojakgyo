@@ -9,7 +9,7 @@
             <div class='container'>
                 <h1>Find Your Id</h1>
 
-                <p>Please fill in this form</p>
+                <p v-if="!(show)">Please fill in this form</p>
                 <p v-if="show">찾으시는 아이디는 {{email}}</p>
                 <hr>
                 <label for='name'><b>Name</b></label>

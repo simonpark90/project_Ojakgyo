@@ -2,9 +2,7 @@ package com.ojakgyo.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,43 +39,36 @@ public class MemberController {
 //		
 //		return null;
 //	}
-	@GetMapping("/member/findid/{name}/{phone}")	
-	public ResponseEntity<Map<String, Object>> findId(@PathVariable String name,@PathVariable String phone){
-		
-		Map<String, Object> resultMap = new HashMap<>();
-		HttpStatus status = null;
-		try {
-			String email = service.findEmailByNameAndPhone(name,phone);
-			if(email != null) {
-				System.out.println("여기까지 들어옴");
-				status = HttpStatus.OK;
-				resultMap.put("status", true);
-				resultMap.put("email", email);
-			}else {
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}
-		
-		}catch(RuntimeException e) {
-			log.error("찾기", e);
-			resultMap.put("message", e.getMessage());
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-		
-		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	
+//	@GetMapping("/member/findid/{name}/{phone}")	
+//	public ResponseEntity<Map<String, Object>> findId(@PathVariable String name,@PathVariable String phone){
+//		Map<String, Object> resultMap = new HashMap<>();
+//		HttpStatus status = HttpStatus.OK;
+//	
+//		try {
+//			resultMap.put("email", Optional.ofNullable(service.findEmailByNameAndPhone(name,phone)).get());
+//		}catch(RuntimeException e) {
+//			status = HttpStatus.INTERNAL_SERVER_ERROR;
+//		}
+//		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+//	}
+	
+	/**
+	 * @param name
+	 * @param phone
+	 * @author Written By Won.JS 09/03/20
+	 * @return 
+	 * 
+	 */
+	
+	@GetMapping("/member/findid/{name}/{phone}") //아이디 찾기
+	public String findId(@PathVariable String name, @PathVariable String phone) {
+		return Optional.ofNullable(service.findEmailByNameAndPhone(name,phone)).get();
 	}
 	
-	
-	
 	@PostMapping("/member")//회원가입
-	void signUp(@RequestBody Member member) {
+	public void signUp(@RequestBody Member member) {
 		Boolean isTrue = service.signUp(member);
-		//isTrue값에 따라 페이지 분기.
-		
-//		if (list.size() != 0)
-//			return list;
-//		else {
-//			throw new EmployeeNotFoundException();
-//		}
 	}
 	
 	

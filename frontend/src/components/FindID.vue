@@ -7,16 +7,16 @@
             title='Close Modal'>&times;</span>
         <div class='modal-content'>
             <div class='container'>
-                <h1>Find Your Id</h1>
+                <h2>Find Your Id</h2>
 
-                <p>Please fill in this form</p>
-                <p v-if="show">찾으시는 아이디는 {{email}}</p>
+                <p v-if="!show">Please fill in this form</p>
+                <div v-if="show"><h1>찾으시는 아이디는 {{email}}</h1></div>
                 <hr>
                 <label for='name'><b>Name</b></label>
-                <input id='name' type='text' placeholder='Enter name' name='name' v-model.trim ='name' required>
+                <input id='name' type='text' placeholder='Enter name' name='name' v-model.trim ='name' required />
 
                 <label for='phone'><b>Phone Number</b></label>
-                <input id='phone' type='text' placeholder='Enter PhoneNumber' name='phone' v-model ='phone' required>
+                <input id='phone' type='text' placeholder='Enter PhoneNumber' name='phone' v-model ='phone' required />
 
                 <div class='clearfix'>
                     <button type='button' @click='close' class='cancelbtn'>Cancel</button>
@@ -52,9 +52,8 @@ export default {
           this.email= '없습니다.';
           this.$axios.get('http://localhost:80/member/findid/'+this.name+'/'+this.phone,{
           }).then(res=>{
-              if(res.data.status){
-                  this.email= res.data.email
-              }
+              console.data;
+              this.email= res.data;
           }).catch(function(){
               alert("아이디가 없습니다.");
           })

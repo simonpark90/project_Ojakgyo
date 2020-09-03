@@ -27,17 +27,17 @@ public class Artwork {
 	private String title;
 	@Column(name = "ARTWORK_LIKE")
 	private int like;
-	@Column(name = "ARTWORK_CONTENT")
+	@Column(name = "ARTWORK_CONTENT")//사진관련 글
 	private String content;
 		
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 	
-	@OneToMany(mappedBy = "artwork")
+	@OneToMany(mappedBy = "artwork")// 댓글
 	private List<Comment> comments = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "artwork")
+	@OneToMany(mappedBy = "artwork")// 사진 list
 	private List<Image> images = new ArrayList<>();
 	
 	@Builder

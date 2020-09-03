@@ -1,4 +1,5 @@
 <template>
+
   <div class="header_bg">
     <div class="wrap">
       <div class="header">
@@ -30,6 +31,22 @@
         <!-----end-nav-------->
         <div class="clear"></div>
       </div>
+
+    <div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">Ojackgyo</a></h1>
+		</div>
+		<div id="nav">
+			<ul>
+				<!-- <li><a href="#" accesskey="3" title="">ArtWorks</a></li> -->
+                <router-link to ="/Artworks">ArtWorks</router-link>
+                <router-link to ="/Signin">Sign in</router-link>
+                <router-link to ="/Signup">Sign up</router-link>
+			</ul>
+		</div>
+	</div>
+
     </div>
   </div>
 </template>

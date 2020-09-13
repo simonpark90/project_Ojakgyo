@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "file",
+      "type": "com.ojakgyo.config.FileStorageProperties",
+      "sourceType": "com.ojakgyo.config.FileStorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "file.upload-dir",
+      "type": "java.lang.String",
+      "sourceType": "com.ojakgyo.config.FileStorageProperties"
+    }
+  ],
+  "hints": []
+}

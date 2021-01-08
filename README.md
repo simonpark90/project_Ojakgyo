@@ -30,7 +30,7 @@
 <br>
 
 ## :computer: 개발 결과
-
+![오작교](https://user-images.githubusercontent.com/68256369/103985224-e6f5a000-51cb-11eb-9e38-6290ac21baba.png)
 
 ## 팀원 소개
 - :japanese_goblin: 유정호(Project Maneger) : 로그인/회원 가입 구현, 게시물 검색 기능, DB 모델링 
